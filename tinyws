@@ -4,6 +4,11 @@ require 'optparse'
 require 'webrick'
 include WEBrick
 
+def logit(level,msg)
+  t = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+  puts "[#{t}] #{level}  #{msg}"
+end
+
 port = 8080
 
 options = OptionParser.new do |opts|
@@ -23,6 +28,7 @@ if ARGV.length != 1
 end
 
 docroot = ARGV[0]
+logit "INFO", "Using docroot '#{docroot}'"
 
 server = WEBrick::HTTPServer.new(:Port => port, :DocumentRoot => docroot)
 
