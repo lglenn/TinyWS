@@ -27,7 +27,7 @@ if ARGV.length != 1
   Process.exit(1)
 end
 
-docroot = ARGV[0]
+docroot = File.expand_path(ARGV[0])
 logit "INFO", "Using docroot '#{docroot}'"
 
 server = WEBrick::HTTPServer.new(:Port => port, :DocumentRoot => docroot)
