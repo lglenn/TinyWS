@@ -6,15 +6,20 @@ include WEBrick
 
 port = 8080
 
-OptionParser.new do |opts|
-  opts.banner = "Usage: tinyws [options] <docroot>"
+options = OptionParser.new do |opts|
+  opts.banner = "Usage: tinyws [options] <docroot>\n\nOptions:"
   opts.on('-p', '--port PORT', 'Listen port' ) do |p|
     port = p
   end
-end.parse!
+end
+
+options.parse!
 
 if ARGV.length != 1
-  raise OptionParser::MissingArgument
+  puts
+  puts options.help
+  puts
+  Process.exit(1)
 end
 
 docroot = ARGV[0]
